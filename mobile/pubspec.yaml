@@ -1,0 +1,66 @@
+name: vigilance
+description: VIGILANCE — Stay Silent. Stay Safe. Stay Connected.
+publish_to: "none"
+version: 0.1.0+1
+
+environment:
+  # 3.6.0 lower bound (not 3.3.0) because Color.withValues() — used in
+  # app/theme.dart / protection_screen.dart in place of the deprecated
+  # withOpacity() — requires Dart 3.6 / Flutter 3.27+.
+  sdk: ">=3.6.0 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+
+  # State management
+  provider: ^6.1.2
+
+  # Networking
+  http: ^1.2.1
+  connectivity_plus: ^6.0.3
+
+  # Secure token storage
+  flutter_secure_storage: ^9.2.2
+
+  # Local persistence (profile cache, offline alert queue, pulse config)
+  shared_preferences: ^2.2.3
+  sqflite: ^2.3.3+1
+  path_provider: ^2.1.3
+  path: ^1.9.0
+
+  # Location
+  geolocator: ^12.0.0
+  permission_handler: ^11.3.1
+
+  # Sensors for Pulse gesture capture (accelerometer/gyroscope stream)
+  sensors_plus: ^6.0.1
+
+  # On-device gesture inference.
+  # PLACEHOLDER: swap in a real trained model at gesture_tflite_detector.dart —
+  # see services/gesture/README.md. Package kept in pubspec so the interface
+  # compiles against the real API shape; MOCK detector is used until a
+  # trained .tflite file is supplied (see Phase 6 / docs/ARCHITECTURE.md §8).
+  tflite_flutter: ^0.11.0
+
+  # SMS fallback.
+  # REQUIRES EXTERNAL SERVICE for a real network SMS API; this package sends
+  # via the device's own SMS capability (telephony), which still requires a
+  # SIM with SMS service on the device it runs on.
+  telephony: ^0.2.0
+
+  # Local/foreground-service notification (required by Android 8+ for any
+  # background sensor work — see docs/ARCHITECTURE.md §3) and push receipt.
+  flutter_local_notifications: ^17.1.2
+
+  intl: ^0.19.0
+  uuid: ^4.4.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true
